@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-//import com.sgz.antoni.lib.ComposeActivity
+import com.sgz.antoni.lib.ComposeActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
 
         val button = findViewById<Button>(R.id.btn_lib)
         button.setOnClickListener {
-            //val intent = Intent(this, ComposeActivity::class.java)
-            //startActivity(intent)
+            val intent = Intent(this, ComposeActivity::class.java)
+            startActivity(intent)
         }
     }
 }
