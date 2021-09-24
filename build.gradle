@@ -6,10 +6,6 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/antoni-sgz-tw/lib")
-        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.2"
@@ -17,6 +13,28 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+
+        def githubProperties = new Properties()
+        def githubFile = rootProject.file("github_credentials.properties")
+        if (githubFile.exists()) {
+            githubProperties.load(new FileInputStream(githubFile))
+        }
+
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/antoni-sgz-tw/lib")
+            credentials {
+                username = githubProperties['github.username'] ?: System.getenv("GITHUB_USERNAME")
+                password = githubProperties['github.password'] ?: System.getenv("GITHUB_API_KEY")
+            }
+        }
     }
 }
 
